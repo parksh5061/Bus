@@ -15,9 +15,10 @@ public class StationStatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_station_status);
         station_name = findViewById(R.id.station_name);
         station_number = findViewById(R.id.station_number);
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        String number = intent.getStringExtra("number");
+        String number = intent.getStringExtra("dest");
 
         station_name.setText(name);
         station_number.setText(number);
