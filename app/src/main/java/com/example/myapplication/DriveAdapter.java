@@ -17,6 +17,7 @@ public class DriveAdapter extends BaseAdapter implements Filterable {
     Context context;
     ArrayList<DriveVO> originalArray, tempArray;
     CustomFilter cs;
+    boolean image_check;
 
     public DriveAdapter(Context context, ArrayList<DriveVO> originalArray) {
         this.context = context;
@@ -44,20 +45,26 @@ public class DriveAdapter extends BaseAdapter implements Filterable {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_item, null);
 
-        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.custom_StationImageView);
-        TextView stationNameTextView = (TextView)row.findViewById(R.id.custom_StationNmTextView);
-        TextView stationNumberTextView = (TextView)row.findViewById(R.id.custom_StationToTextView);
-        TextView stationToTextView = (TextView)row.findViewById(R.id.custom_toTextView);
+        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.bus_status_bookmark);
+        TextView stationNameTextView = (TextView)row.findViewById(R.id.bus_status_name);
+        TextView stationNumberTextView = (TextView)row.findViewById(R.id.bus_status_number);
+        // TextView stationToTextView = (TextView)row.findViewById(R.id.custom_toTextView);
 
         bookmarkImageView.setImageResource(originalArray.get(position).getBookmark());
         stationNameTextView.setText(originalArray.get(position).getStationName());
         stationNumberTextView.setText(originalArray.get(position).getStationNumber());
-        stationToTextView.setText(originalArray.get(position).getStationTo());
+        // stationToTextView.setText(originalArray.get(position).getStationTo());
 
         bookmarkImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bookmarkImageView.setImageResource(R.drawable.heart2);
+                if(image_check == false){
+                    bookmarkImageView.setImageResource(R.drawable.heart2);
+                    image_check = true;
+                } else if(image_check == true){
+                    bookmarkImageView.setImageResource(R.drawable.heart1);
+                    image_check = false;
+                }
             }
         });
 
@@ -83,7 +90,7 @@ public class DriveAdapter extends BaseAdapter implements Filterable {
 
                 for (int i = 0; i < tempArray.size(); i++) {
                     if (tempArray.get(i).getStationName().contains(constraint)) {
-                        DriveVO driveVO = new DriveVO(tempArray.get(i).getBookmark(), tempArray.get(i).getStationName(), tempArray.get(i).getStationNumber(), tempArray.get(i).getStationTo());
+                        DriveVO driveVO = new DriveVO(tempArray.get(i).getBookmark(), tempArray.get(i).getStationName(), tempArray.get(i).getStationNumber());
                         filters.add(driveVO);
                     }
                 }

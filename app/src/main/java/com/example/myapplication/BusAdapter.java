@@ -16,6 +16,7 @@ public class BusAdapter extends BaseAdapter implements Filterable {
     Context context;
     ArrayList<BusVO> originalArray, tempArray;
     CustomFilter cs;
+    boolean image_check;
 
     public BusAdapter(Context context, ArrayList<BusVO> originalArray) {
         this.context = context;
@@ -43,9 +44,9 @@ public class BusAdapter extends BaseAdapter implements Filterable {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_item2, null);
 
-        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.custom_StationImageView);
-        TextView busNameTextView = (TextView)row.findViewById(R.id.custom_StationNmTextView);
-        TextView busToTextView = (TextView)row.findViewById(R.id.custom_StationToTextView);
+        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.bus_status_bookmark);
+        TextView busNameTextView = (TextView)row.findViewById(R.id.bus_status_name);
+        TextView busToTextView = (TextView)row.findViewById(R.id.bus_status_number);
 
         bookmarkImageView.setImageResource(originalArray.get(position).getBookmark());
         busNameTextView.setText(originalArray.get(position).getBusName());
@@ -54,7 +55,13 @@ public class BusAdapter extends BaseAdapter implements Filterable {
         bookmarkImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bookmarkImageView.setImageResource(R.drawable.heart2);
+                if(image_check == false){
+                    bookmarkImageView.setImageResource(R.drawable.heart2);
+                    image_check = true;
+                } else if(image_check == true){
+                    bookmarkImageView.setImageResource(R.drawable.heart1);
+                    image_check = false;
+                }
             }
         });
 

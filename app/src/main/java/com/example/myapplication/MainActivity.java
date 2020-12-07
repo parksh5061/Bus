@@ -8,12 +8,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     private BusAdapter busAdapter;
     private EditText editText;
     private TabHost tabHost;
+    private TextView location_textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +42,14 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         ArrayList<DriveVO> customDatas = new ArrayList<>();
         ArrayList<BusVO> busDatas = new ArrayList<>();
         location_imageView = findViewById(R.id.location_imageView);
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.bus_status_listview);
         listView2 = findViewById(R.id.listView2);
         editText = findViewById(R.id.editText);
         editText.addTextChangedListener(this);
         custom_li = findViewById(R.id.custom_li);
-        bookmark1= findViewById(R.id.custom_StationImageView);
+        bookmark1= findViewById(R.id.bus_status_bookmark);
         tabHost = findViewById(R.id.tabHost1);
+        location_textView = findViewById(R.id.location_textView);
 
         TabHost.TabSpec ts = tabHost.newTabSpec("Tab Spec");
         tabHost.setup();
@@ -67,13 +69,13 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
                         String content = sheet.getCell(1, row).getContents();
                         String content1 = sheet.getCell(2, row).getContents();
                         String content2 = sheet.getCell(3, row).getContents();
-                        String content3 = sheet.getCell(4, row).getContents();
+                        // String content3 = sheet.getCell(4, row).getContents();
 
-                        DriveVO vo = new DriveVO(R.drawable.heart1, content1, content2, content3);
+                        DriveVO vo = new DriveVO(R.drawable.heart1, content1, content2);
                         vo.bookmark = R.drawable.heart1;
                         vo.stationName = content1;
                         vo.stationNumber = content;
-                        vo.stationTo = content3;
+                        // vo.stationTo = content3;
 
                         customDatas.add(vo);
                     }
@@ -150,12 +152,10 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 station_name = ((DriveVO) adapter.getItem(position)).stationName;
                 station_number = ((DriveVO) adapter.getItem(position)).stationNumber;
-                station_to = ((DriveVO) adapter.getItem(position)).stationTo;
 
                 Intent intent = new Intent(MainActivity.this, StationStatusActivity.class);
                 intent.putExtra("name", station_name);
                 intent.putExtra("number", station_number);
-                intent.putExtra("dest", station_to);
                 startActivity(intent);
 
             }
@@ -167,16 +167,23 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
                 bus_name = ((BusVO) busAdapter.getItem(position)).busName;
                 bus_to = ((BusVO) busAdapter.getItem(position)).busTo;
 
-                Intent intent = new Intent(MainActivity.this, StationStatusActivity.class);
+                Intent intent = new Intent(MainActivity.this, BusStatusActivity.class);
                 intent.putExtra("name", bus_name);
                 intent.putExtra("dest", bus_to);
 
                 startActivity(intent);
-                // station_TextView.setText(bus_name);
             }
         });
 
         location_imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        location_textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LocationActivity.class);

@@ -7,13 +7,13 @@ public class DriveVO {
     public int bookmark;
     public String stationName;
     public String stationNumber;
-    public String stationTo;
+    // public String stationTo;
 
-    public DriveVO(int bookmark, String stationName, String stationNumber, String stationTo) {
+    public DriveVO(int bookmark, String stationName, String stationNumber) {
         this.bookmark = bookmark;
         this.stationName = stationName;
         this.stationNumber = stationNumber;
-        this.stationTo = stationTo;
+        // this.stationTo = stationTo;
     }
 
     public int getBookmark() {
@@ -40,6 +40,7 @@ public class DriveVO {
         this.stationNumber = stationNumber;
     }
 
+    /*
     public String getStationTo() {
         return stationTo;
     }
@@ -47,4 +48,5 @@ public class DriveVO {
     public void setStationTo(String stationTo) {
         this.stationTo = stationTo;
     }
+     */
 }
