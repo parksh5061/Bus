@@ -84,7 +84,11 @@ public class RegisterActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(com.example.myapplication.RegisterActivity.this);
                 queue.add(registerRequest);
 
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
+
+
         });
 
     }

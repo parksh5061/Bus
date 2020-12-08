@@ -86,12 +86,11 @@ public class BusStatusActivity extends AppCompatActivity {
                 station_name = ((BusStatusVO) adapter.getItem(position)).station_name;
                 station_number = ((BusStatusVO) adapter.getItem(position)).station_number;
 
-                Toast.makeText(getApplicationContext(), "station_name : " + station_name + " station_number : " + station_number, Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(BusStatusActivity.this, StationStatusActivity.class);
-                // intent.putExtra("name", station_name);
-                // intent.putExtra("number", station_number);
-                // startActivity(intent);
-
+                // Toast.makeText(getApplicationContext(), "station_name : " + station_name + " station_number : " + station_number, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(BusStatusActivity.this, StationStatusActivity.class);
+                intent.putExtra("name", station_name);
+                intent.putExtra("number", station_number);
+                startActivity(intent);
             }
         });
 

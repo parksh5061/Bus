@@ -225,4 +225,5 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

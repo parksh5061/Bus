@@ -211,8 +211,13 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         String name = listDatas.get(position).get("name");
         String number = listDatas.get(position).get("number");
 
-        Toast.makeText(getApplicationContext(), "name : " + name + " " + number, Toast.LENGTH_LONG).show();
-        Log.d("test", name + " " + number);
+        // Toast.makeText(getApplicationContext(), "name : " + name + " " + number, Toast.LENGTH_LONG).show();
+        // Log.d("test", name + " " + number);
+
+        Intent intent = new Intent(LocationActivity.this, StationReportActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("number", number);
+        startActivity(intent);
     }
 
     @Override
