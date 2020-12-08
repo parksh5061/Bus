@@ -44,9 +44,9 @@ public class BusAdapter extends BaseAdapter implements Filterable {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_item2, null);
 
-        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.bus_status_bookmark);
-        TextView busNameTextView = (TextView)row.findViewById(R.id.bus_status_name);
-        TextView busToTextView = (TextView)row.findViewById(R.id.bus_status_number);
+        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.repair_imageView);
+        TextView busNameTextView = (TextView)row.findViewById(R.id.bus_report_name);
+        TextView busToTextView = (TextView)row.findViewById(R.id.bus_report_number);
 
         bookmarkImageView.setImageResource(originalArray.get(position).getBookmark());
         busNameTextView.setText(originalArray.get(position).getBusName());

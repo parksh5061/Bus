@@ -39,9 +39,9 @@ public class BusStatusAdapter extends BaseAdapter  {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_item3, null);
 
-        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.bus_status_bookmark);
-        TextView stationNameTextView = (TextView)row.findViewById(R.id.bus_status_name);
-        TextView stationNumberTextView = (TextView)row.findViewById(R.id.bus_status_number);
+        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.repair_imageView);
+        TextView stationNameTextView = (TextView)row.findViewById(R.id.bus_report_name);
+        TextView stationNumberTextView = (TextView)row.findViewById(R.id.bus_report_number);
 
         bookmarkImageView.setImageResource(originalArray.get(position).getBookmark());
         stationNameTextView.setText(originalArray.get(position).getStation_name());
