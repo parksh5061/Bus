@@ -238,4 +238,26 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Intent intent = new Intent(LocationActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_report:
+                Intent intent2 = new Intent(LocationActivity.this, ReportResultActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
