@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -208,7 +211,31 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         String name = listDatas.get(position).get("name");
         String number = listDatas.get(position).get("number");
 
-        Toast.makeText(getApplicationContext(), "name : " + name + " " + number, Toast.LENGTH_LONG).show();
-        Log.d("test", name + " " + number);
+        Intent intent = new Intent(LocationActivity.this, StationStatusActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("number", number);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Intent intent = new Intent(LocationActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_report:
+                Intent intent2 = new Intent(LocationActivity.this, ReportResultActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

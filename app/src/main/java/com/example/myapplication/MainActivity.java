@@ -1,19 +1,20 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,9 +27,8 @@ import jxl.read.biff.BiffException;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher {
     private ListView listView, listView2;
-    private String station_name, station_number, station_to, bus_name, bus_to;
+    private String station_name, station_number, bus_name, bus_to;
     private ImageView location_imageView, bookmark1;
-    private LinearLayout custom_li;
     private DriveAdapter adapter;
     private BusAdapter busAdapter;
     private EditText editText;
@@ -46,13 +46,9 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         listView2 = findViewById(R.id.listView2);
         editText = findViewById(R.id.editText);
         editText.addTextChangedListener(this);
-        custom_li = findViewById(R.id.custom_li);
-        bookmark1= findViewById(R.id.bus_status_bookmark);
+        bookmark1= findViewById(R.id.repair_imageView);
         tabHost = findViewById(R.id.tabHost1);
         location_textView = findViewById(R.id.location_textView);
-
-        TabHost.TabSpec ts = tabHost.newTabSpec("Tab Spec");
-        tabHost.setup();
 
         try {
             InputStream is = getBaseContext().getResources().getAssets().open("data.xls");
@@ -137,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
             e.printStackTrace();
         }
 
+        tabHost.setup();
+
         TabHost.TabSpec ts1 = tabHost.newTabSpec("버스");
         ts1.setContent(R.id.content1);
         ts1.setIndicator("버스");
@@ -157,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
                 intent.putExtra("name", station_name);
                 intent.putExtra("number", station_number);
                 startActivity(intent);
-
             }
         });
 
@@ -205,5 +202,27 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_report:
+                Intent intent2 = new Intent(MainActivity.this, ReportResultActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

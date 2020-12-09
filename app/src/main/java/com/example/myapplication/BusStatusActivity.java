@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,8 +33,8 @@ public class BusStatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bus_status);
         ArrayList<BusStatusVO> busStatusDatas = new ArrayList<>();
         listView = findViewById(R.id.bus_status_listview);
-        bus_name = findViewById(R.id.bus_name);
-        destination_name = findViewById(R.id.destination_name);
+        bus_name = findViewById(R.id.station_name);
+        destination_name = findViewById(R.id.station_number);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -83,14 +86,37 @@ public class BusStatusActivity extends AppCompatActivity {
                 station_name = ((BusStatusVO) adapter.getItem(position)).station_name;
                 station_number = ((BusStatusVO) adapter.getItem(position)).station_number;
 
-                Toast.makeText(getApplicationContext(), "station_name : " + station_name + " station_number : " + station_number, Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(BusStatusActivity.this, StationStatusActivity.class);
-                // intent.putExtra("name", station_name);
-                // intent.putExtra("number", station_number);
-                // startActivity(intent);
+                // Toast.makeText(getApplicationContext(), "station_name : " + station_name + " station_number : " + station_number, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(BusStatusActivity.this, StationStatusActivity.class);
+                intent.putExtra("name", station_name);
+                intent.putExtra("number", station_number);
+                startActivity(intent);
 
             }
         });
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Intent intent = new Intent(BusStatusActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_report:
+                Intent intent2 = new Intent(BusStatusActivity.this, ReportResultActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

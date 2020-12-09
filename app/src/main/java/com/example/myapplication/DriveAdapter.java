@@ -45,9 +45,9 @@ public class DriveAdapter extends BaseAdapter implements Filterable {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_item, null);
 
-        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.bus_status_bookmark);
-        TextView stationNameTextView = (TextView)row.findViewById(R.id.bus_status_name);
-        TextView stationNumberTextView = (TextView)row.findViewById(R.id.bus_status_number);
+        ImageView bookmarkImageView = (ImageView)row.findViewById(R.id.repair_imageView);
+        TextView stationNameTextView = (TextView)row.findViewById(R.id.bus_report_name);
+        TextView stationNumberTextView = (TextView)row.findViewById(R.id.bus_report_number);
         // TextView stationToTextView = (TextView)row.findViewById(R.id.custom_toTextView);
 
         bookmarkImageView.setImageResource(originalArray.get(position).getBookmark());
